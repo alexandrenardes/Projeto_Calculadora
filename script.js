@@ -16,12 +16,28 @@ class Calculator {
         this.previousOperandTextElement = previousOperandTextElement;
         this.currentOperandTextElement = currentOperandTextElement;
     } 
-    
-calculate(){
+
+calculate() {
     let result;
 
-    const _previousOperand = parseFloat(this.previousOperand)
-    const _currentOperand = parseFloat(this.currentOperand)
+    const _previousOperand = parseFloat(this.previousOperand);
+    const _currentOperand = parseFloat(this.currentOperand);
+
+    if (isNaN(_previousOperand) || isNaN(_currentOperand))return;
+
+    switch (this.operation){
+        case '+':
+            result = _previousOperand + _currentOperand;
+        case "-":
+            result = _previousOperand - _currentOperand;
+        case "/":
+            result = _previousOperand - _currentOperand;
+        case "*":
+            result = _previousOperand - _currentOperand; 
+            break;
+            default:
+            return; 
+    }
 }
 
 chooseOperation(operation) {
@@ -32,7 +48,7 @@ chooseOperation(operation) {
 
     this.operation = operation;
 
-    this.previousOperand = `${this.currentOperand} ${this.operation}`;
+    this.previousOperand = this.operation;
     this.currentOperand = "";
 }
 
@@ -49,7 +65,7 @@ appendNumber(number) {
     }
 
     updateDisplay() {
-        this.previousOperandTextElement.innerText = this.previousOperand;
+        this.previousOperandTextElement.innerText = `${this.previousOperand} ${this.operation || ""}`;
         this.currentOperandTextElement.innerText = this.currentOperand;
     }
 }
