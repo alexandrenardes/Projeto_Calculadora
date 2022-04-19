@@ -18,6 +18,11 @@ class Calculator {
     } 
 
 chooseOperation(operation) {
+    if (this.previousOperand !== ''){
+        this.calculate()
+    }
+
+
     this.operation = operation;
 
     this.previousOperand = `${this.currentOperand} ${this.operation}`;
