@@ -17,8 +17,11 @@ class Calculator {
         this.currentOperandTextElement = currentOperandTextElement;
     } 
 
-chooseOperation() {
-    
+chooseOperation(operation) {
+    this.operation = operation;
+
+    this.previousOperand = `${this.currentOperand} ${this.operation}`;
+    this.currentOperand = "";
 }
 
 appendNumber(number) { 
@@ -49,10 +52,15 @@ const calculator = new Calculator(
         calculator.appendNumber(numberButton.innerText);
         calculator.updateDisplay();
     });
+    }
+    for (const operationButton of operationButtons ) {
+        operationButton.addEventListener("click", () => {
+            calculator.chooseOperation(operationButton.innerText);
+            calculator.updateDisplay();
+        });
+    }
 
 allClearButton.addEventListener("click", () => {
     calculator.clear();
     calculator.updateDisplay();
 });
-
-}
